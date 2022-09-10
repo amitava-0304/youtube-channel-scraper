@@ -72,8 +72,11 @@ def search():
         driver.quit()
         reviews=[]
 
-        mydict={"channel_name":channel_name,"channel_subscribers":channel_subscribers,"no_of_videos":no_of_videos,"channel_desc":channel_desc,"channel_avtar_url":channel_avtar_url,"channel_url":channel_url}
-        reviews.append(mydict)
+        mydict={"channel_name":[channel_name],"channel_subscribers":[channel_subscribers],"no_of_videos":[no_of_videos],"channel_desc":[channel_desc],"channel_avtar_url":[channel_avtar_url],"channel_url":[channel_url]}
+        df_channel=pd.DataFrame(mydict)
+        data_import.insert_channel_details(df_channel)
+        mydict2 = {"channel_name": channel_name, "channel_subscribers": channel_subscribers,"no_of_videos": no_of_videos, "channel_desc": channel_desc,"channel_avtar_url":channel_avtar_url,"channel_url":channel_url}
+        reviews.append(mydict2)
         res=render_template('home.html', reviews=reviews)
         return res
     else:
@@ -139,7 +142,7 @@ def top_videos():
         video_thumbnail_urls = []
         video_likes = []
         flag = 1
-        for i in video_links[0:5]:
+        for i in video_links[0:2]:
             #driver1 = webdriver.Chrome()
 
             # Navigates to the URL, maximizes the current window, and
@@ -155,7 +158,7 @@ def top_videos():
             #video_likes.append(driver.find_element(By.XPATH,'//*[@id="top-level-buttons-computed"]/ytd-toggle-button-renderer[1]/a').text)
         print(flag)
         flag = flag + 1
-        for i in video_links[0:5]:
+        for i in video_links[0:2]:
             c=comments.scrape(i)
             for j in c:
                 video_likes.append(j)
@@ -172,9 +175,9 @@ def top_videos():
         for i in video_thumbnail_urls:
             image_downloader.download_image(i, (channel_name+str(count)),channel_name)
             count += 1
-        for i,j in zip(video_links[0:5],video_titles[0:5]):
+        for i,j in zip(video_links[0:2],video_titles[0:2]):
             proj.scrape(i,j)
-        download.downloader(video_links[0:5], channel_name)
+        #download.downloader(video_links[0:2], channel_name)
     #reviews = []
     #data={"channel_name":channel_name,"channel_subscribers":channel_subscribers,"no_of_videos":no_of_videos,"channel_desc":channel_desc,"channel_avtar_url":channel_avtar_url}
     #a.append(data)

@@ -32,7 +32,7 @@ def search():
         # on the basis of search text...search on youtube
         search_text = request.form['search_text']
         url = "https://www.youtube.com/results?search_query="+search_text.replace(' ','+')
-        driver = webdriver.Chrome()
+        '''driver = webdriver.Chrome()
         driver.maximize_window()
         driver.get(url)
         time.sleep(5)
@@ -53,8 +53,19 @@ def search():
         driver.quit()
         reviews=[]
         mydict={"channel_name":channel_name,"channel_subscribers":channel_subscribers,"no_of_videos":no_of_videos,"channel_desc":channel_desc,"channel_avtar_url":channel_avtar_url,"channel_url":channel_url}
-        reviews.append(mydict)
-        res=render_template('index.html', reviews=reviews)
+        reviews.append(mydict)'''
+        details = request.form
+        #channel_name = request.form['channel_name']
+        cur = mysql.connection.cursor()
+        print(search_text)
+        sql = "select * from youtuber_channel where channel_name=%s"
+        adr = (search_text,)
+        cur.execute(sql, adr)
+        results = cur.fetchall()
+        print(results)
+        mysql.connection.commit()
+        cur.close()
+        res=render_template('index.html', results=results)
         return res
     else:
         return render_template('index.html')

@@ -30,3 +30,31 @@ def insert_query(query):
 
     finally:
          conn.close()
+def insert_channel_details(query):
+    '''conn = MySQLdb.connect(host="localhost",
+                           user="root",
+                           passwd="root",
+                           db="youtube_scraper")'''
+    conn = MySQLdb.connect(host="youtube-scraper.cxuykfjq7u4s.us-west-2.rds.amazonaws.com",
+                           user="admin",
+                           passwd="pushu6789",
+                           db="youtube_scraper")
+    c = conn.cursor()
+
+    try:
+      for i, row in query.iterrows():
+          sql = """INSERT IGNORE INTO youtuber_channel(channel_name,channel_subscribers,no_of_videos,channel_desc,channel_avtar_url,channel_url) VALUES (%s, %s, %s, %s, %s, %s);"""
+          c.execute(sql, tuple(row))
+          conn.commit()
+
+    except ValueError as v:
+        print(v)
+
+    except Exception as e:
+        print(e)
+
+    else:
+         print("data inserted successfully......")
+
+    finally:
+         conn.close()

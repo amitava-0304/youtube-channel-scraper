@@ -49,37 +49,37 @@
               </div>
           </form>
 
-          {% for review in reviews %}
+          {% for row in results %}
             <div class="card text-center mt-5" style="">
             <div class="card-body">
 
               <div class="row">
                   <div class="col-sm-12">
-                    <img src="{{review['channel_avtar_url']}}" width=210 height=210 alt=""><br>
+                    <img src="{{ row[5] }}" width=210 height=210 alt=""><br>
                   </div>
               </div>
 
               <div class="row mt-2">
                 <div class="col-sm-12">
-                  <h2 style="font-family:'Comic Sans MS';color: #1B4F72 " class="card-title">{{review['channel_name']}}</h2>
+                  <h2 style="font-family:'Comic Sans MS';color: #1B4F72 " class="card-title">{{ row[1] }}</h2>
                 </div>
               </div>
 
               <div class="row mt-2">
                 <div class="col-sm-12">
-                  <h3 style="font-family:'Comic Sans MS'">Subscribers : {{review['channel_subscribers']}}</h3>
+                  <h3 style="font-family:'Comic Sans MS'">Subscribers : {{ row[2]}}</h3>
                 </div>
               </div>
 
               <div class="row mt-2">
                 <div class="col-sm-12">
-                  <h4 style="font-family:'Comic Sans MS';color: #A93226">Videos Uploaded : {{review['no_of_videos']}}</h4>
+                  <h4 style="font-family:'Comic Sans MS';color: #A93226">Videos Uploaded : {{ row[3] }}</h4>
                 </div>
               </div>
 
               <div class="row mt-2">
                 <div class="col-sm-12">
-                  <p style="font-family:'Comic Sans MS';font-size: large" class="card-text"><b>Description</b> : {{review['channel_desc']}}</p>
+                  <p style="font-family:'Comic Sans MS';font-size: large" class="card-text"><b>Description</b> : {{ row[4] }}</p>
                 </div>
               </div>
 
@@ -87,7 +87,7 @@
               <form class="" action="/videos" method="post">
               <div class="row mt-4 mb-2">
                 <div class="col-sm-12">
-                     <input type="hidden" name="channel_name" value="{{review['channel_name']}}">
+                     <input type="hidden" name="channel_name" value="{{ row[1] }}">
                      <button class="btn btn-primary" type="submit">Display latest 50 video details 👉 </button>
                 </div>
               </div>
