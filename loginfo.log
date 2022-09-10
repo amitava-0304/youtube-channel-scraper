@@ -1,0 +1,24 @@
+2022-09-06 14:15:07,235 INFO werkzeug  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-09-06 14:15:07,236 INFO werkzeug  [33mPress CTRL+C to quit[0m
+2022-09-06 14:15:07,240 INFO werkzeug   * Restarting with stat
+2022-09-06 14:15:10,924 WARNING werkzeug   * Debugger is active!
+2022-09-06 14:15:10,939 INFO werkzeug   * Debugger PIN: 916-286-466
+2022-09-06 14:17:08,050 INFO werkzeug  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-09-06 14:17:08,050 INFO werkzeug  [33mPress CTRL+C to quit[0m
+2022-09-06 14:17:08,099 INFO werkzeug   * Restarting with stat
+2022-09-06 14:17:10,818 WARNING werkzeug   * Debugger is active!
+2022-09-06 14:17:10,826 INFO werkzeug   * Debugger PIN: 916-286-466
+2022-09-06 14:21:55,923 INFO werkzeug  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-09-06 14:21:55,924 INFO werkzeug  [33mPress CTRL+C to quit[0m
+2022-09-06 14:21:55,927 INFO werkzeug   * Restarting with stat
+2022-09-06 14:21:58,955 WARNING werkzeug   * Debugger is active!
+2022-09-06 14:21:58,973 INFO werkzeug   * Debugger PIN: 916-286-466
+2022-09-06 14:26:56,246 INFO werkzeug  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2022-09-06 14:26:56,247 INFO werkzeug  [33mPress CTRL+C to quit[0m
+2022-09-06 14:26:56,250 INFO werkzeug   * Restarting with stat
+2022-09-06 14:26:59,478 WARNING werkzeug   * Debugger is active!
+2022-09-06 14:26:59,487 INFO werkzeug   * Debugger PIN: 916-286-466

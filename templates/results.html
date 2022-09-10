@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/sytle.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+      body {
+  background: #555;
+  background-color: #E9F7EF ;
+ }
+
+.content {
+  max-width: 1500px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+
+}
+</style>
+</head>
+
+<body>
+ <div class="container-fluid">
+      <div class="row" style="background-color:#FF6347;">
+        <div class="col-sm-12 mt-1 mb-1" style="font-family:'Comic Sans MS'; font-size: 30px;">
+          <center><b>Welcome to YouTube-Scrapper</b></center>
+        </div>
+      </div>
+      <div class="row">
+        <div class="content">
+
+          <form class="" action="/review" method="post" style="margin:auto;max-width:700px">
+            <div class="row" style="margin-top:20px;">
+
+                <div class="col-sm-10" align="center">
+                 <input class="form-control" type="search" name = "search_text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-outline-success" type="submit" style="margin-left:-20px;">Search</button>
+                </div>
+              </div>
+          </form>
+        </div></div>
+  <div class="table-users">
+   <div class="header"><center><b><font color="blue" size="30" face="Lucida Calligraphy">Reviews</font></b></center></div>
+
+   <table cellspacing="0" border="1" width="1400" align="center">
+      <tr>
+         <th width="270">Title</th>
+         <th width="230">Commenter</th>
+         <th width="500">Comment</th>
+
+
+      </tr>
+         {% for review in title %}
+      <tr>
+          <td>{{review['Title']}}</td>
+         <td>{{review['Commenter']}}</td>
+         <td>{{review['Review']}}</td>
+
+
+       </tr>
+       {% endfor %}
+   </table>
+</div>
+
+ </div>
+
+</body>
+
+</html>

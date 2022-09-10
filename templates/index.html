@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/sytle.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>YouTube-Scrapper</title>
+  <style>
+      body {
+  background: #555;
+  background-color: #E9F7EF ;
+ }
+
+.content {
+  max-width: 1500px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+
+}
+</style>
+  </head>
+  <body>
+   <center>
+       <div class="content" style="background-image: https://www.freeiconspng.com/thumbs/youtube-logo-png/youtube-logo-picture-download-1.png;">
+    <div class="container-fluid">
+      <div class="row" style="background-color:#85C1E9;">
+        <div class="col-sm-12 mt-1 mb-1" style="font-family:'Comic Sans MS'; font-size: 30px;">
+          <center><b>Welcome to YouTube-Channel-Scrapper</b></center>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="content">
+
+          <form class="" action="/review" method="post" style="margin:auto;max-width:700px">
+            <div class="row" style="margin-top:20px;">
+
+                <div class="col-sm-10" align="center">
+                 <input class="form-control" type="search" name = "search_text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-outline-success" type="submit" style="margin-left:-20px;">Search</button>
+                </div>
+              </div>
+          </form>
+
+          {% for review in reviews %}
+            <div class="card text-center mt-5" style="">
+            <div class="card-body">
+
+              <div class="row">
+                  <div class="col-sm-12">
+                    <img src="{{review['channel_avtar_url']}}" width=210 height=210 alt=""><br>
+                  </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <h2 style="font-family:'Comic Sans MS';color: #1B4F72 " class="card-title">{{review['channel_name']}}</h2>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <h3 style="font-family:'Comic Sans MS'">Subscribers : {{review['channel_subscribers']}}</h3>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <h4 style="font-family:'Comic Sans MS';color: #A93226">Videos Uploaded : {{review['no_of_videos']}}</h4>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <p style="font-family:'Comic Sans MS';font-size: large" class="card-text"><b>Description</b> : {{review['channel_desc']}}</p>
+                </div>
+              </div>
+
+
+              <form class="" action="/videos" method="post">
+              <div class="row mt-4 mb-2">
+                <div class="col-sm-12">
+                     <input type="hidden" name="channel_name" value="{{review['channel_name']}}">
+                     <button class="btn btn-primary" type="submit">Display latest 50 video details 👉 </button>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+
+    </div>
+{% endfor %}
+
+<div class="container-fluid">
+      <div class="row" style="background-color:#85C1E9;">
+        <div class="col-sm-12 mt-1 mb-1" style="font-family:'Comic Sans MS'; font-size: 30px;">
+          <center><b></b></center>
+        </div>
+      </div>
+
+      </div>
+    </div>
+        <div class="container-fluid">
+      <div class="row" style="background-color:#AF7AC5;">
+        <div class="col-sm-12 mt-1 mb-1" style="font-family:'Comic Sans MS'; font-size: 30px;">
+          <center><b></b></center>
+        </div>
+      </div>
+
+      </div>
+    </div>
+        <div class="container-fluid">
+      <div class="row" style="background-color:#48C9B0 ;">
+        <div class="col-sm-12 mt-1 mb-1" style="font-family:'Comic Sans MS'; font-size: 30px;">
+          <center><b></b></center>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+</center>
+  </div>
+  </body>
+</html>

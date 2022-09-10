@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/sytle.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>YouTube-Scrapper</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" style="background-color:#FF6347;">
+        <div class="col-sm-12 mt-1 mb-1" style="font-family:'Comic Sans MS'; font-size: 30px;">
+          <center><b>Welcome to YouTube-Scrapper</b></center>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <form class="" action="/review" method="post">
+            <div class="row" style="margin-top:20px;">
+
+                <div class="col-sm-10">
+                  <input class="form-control" type="search" name = "search_text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-outline-success" type="submit" style="margin-left:-20px;">Search</button>
+                </div>
+              </div>
+          </form>
+          {% for review in reviews %}
+            <div class="card text-center mt-5" style="">
+            <div class="card-body">
+
+              <div class="row">
+                  <div class="col-sm-12">
+                    <img src="{{review['channel_avtar_url']}}" alt=""><br>
+                  </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <h2 style="font-family:'Comic Sans MS'" class="card-title">{{review['channel_name']}}</h2>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <h3 style="font-family:'Comic Sans MS'">Subscribers : {{review['channel_subscribers']}}</h3>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <h4 style="font-family:'Comic Sans MS'">Videos Uploaded : {{review['no_of_videos']}}</h4>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <p style="font-family:'Comic Sans MS'" class="card-text"><b>Description</b> : {{review['channel_desc']}}</p>
+                </div>
+              </div>
+
+
+              <form class="" action="/videos" method="post">
+              <div class="row mt-4 mb-2">
+                <div class="col-sm-12">
+                    <input type="hidden" name="channel_avtar_url" value="{{review['channel_avtar_url']}}">
+                    <input type="hidden" name="channel_name" value="{{review['channel_name']}}">
+                    <input type="hidden" name="channel_subscribers" value="{{review['channel_subscribers']}}">
+                    <input type="hidden" name="no_of_videos" value="{{review['no_of_videos']}}">
+                    <input type="hidden" name="channel_desc" value="{{review['channel_desc']}}">
+                    <input type="hidden" name="channel_url" value="{{review['channel_url']}}">
+
+                    <button class="btn btn-primary" type="submit">Display top 10 videos 👉 </button>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+
+    </div>
+{% endfor %}
+
+<div class=page>
+  {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
+  {% endfor %}
+</div>
+
+
+         </table>
+       </div>
+
+      </div>
+    </div>
+
+
+  </body>
+</html>
