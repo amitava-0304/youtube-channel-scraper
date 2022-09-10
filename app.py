@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+import os
 import pymongo
 from flask import Flask, render_template, request,jsonify
 from flask_cors import CORS,cross_origin
@@ -94,10 +96,12 @@ def comment_details():
         st=str(searchTitle)
         print(st)
         try:
-            client = pymongo.MongoClient(
-                "mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority")
+            load_dotenv()
+            MONGODB_URI = os.getenv("MONGODB_URI")
+            client = pymongo.MongoClient(MONGODB_URI)
+            #client = pymongo.MongoClient("mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority")
             db = client.test
-            print(db)
+            #print(db)
             database = client['Youtuber']
             print(database)
             collection = database["reviews"]
