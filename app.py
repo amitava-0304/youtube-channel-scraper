@@ -97,14 +97,14 @@ def comment_details():
             client = pymongo.MongoClient(
                 "mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority")
             db = client.test
-            #print(db)
+            print(db)
             database = client['Youtuber']
-            #print(database)
+            print(database)
             collection = database["reviews"]
             #print(collection)
             # collection.insert_many(data)
             title = collection.find({'Url':st})
-            #print(title)
+            print(title)
             l = []
             for i in title:
                 l.append(i)
