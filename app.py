@@ -6,8 +6,6 @@ from flask_cors import CORS,cross_origin
 import requests
 import pandas as pd
 import time
-import re
-import numpy
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'youtube-scraper.cxuykfjq7u4s.us-west-2.rds.amazonaws.com'
