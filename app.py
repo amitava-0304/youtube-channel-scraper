@@ -4,14 +4,6 @@ import pymongo
 from flask import Flask, render_template, request,jsonify
 from flask_cors import CORS,cross_origin
 import requests
-from bs4 import BeautifulSoup as bs
-from urllib.request import urlopen as uReq
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait,Select
-from selenium.webdriver.support import expected_conditions as EC
-from pytube import YouTube
 import pandas as pd
 import time
 import re
@@ -33,35 +25,11 @@ def search():
     if request.method == 'POST':
         # on the basis of search text...search on youtube
         search_text = request.form['search_text']
-        url = "https://www.youtube.com/results?search_query="+search_text.replace(' ','+')
-        '''driver = webdriver.Chrome()
-        driver.maximize_window()
-        driver.get(url)
-        time.sleep(5)
-
-        # get channel details
-        channel_section = driver.find_element(By.ID,"content-section")
-        channel_details = channel_section.text.split("\n")
-        channel_name = channel_details[0]
-        channel_subscribers = channel_details[1].split(" ")[0]
-        channel_desc = channel_details[2]
-        no_of_videos = channel_details[1].split(" ")[1][12:]
-
-        avtar = channel_section.find_element(By.XPATH,"//*[@id='avatar-section']/a")
-        channel_url = avtar.get_attribute("href")
-        img_section = channel_section.find_element(By.ID,"img")
-        channel_avtar_url = img_section.get_attribute("src")
-
-        driver.quit()
-        reviews=[]
-        mydict={"channel_name":channel_name,"channel_subscribers":channel_subscribers,"no_of_videos":no_of_videos,"channel_desc":channel_desc,"channel_avtar_url":channel_avtar_url,"channel_url":channel_url}
-        reviews.append(mydict)'''
         details = request.form
-        #channel_name = request.form['channel_name']
         cur = mysql.connection.cursor()
         print(search_text)
-        sql = "select * from youtuber_channel where channel_name=%s"
-        adr = (search_text,)
+        sql = "select * from youtuber_channel where channel_name like %s"
+        adr = (search_text+"%",)
         cur.execute(sql, adr)
         results = cur.fetchall()
         print(results)
