@@ -8,5 +8,6 @@
 ### For uploading and Downloading(scraping,mysql,mongodb):view.py
 ### For output: https://github.com/amitava-0304/youtube-channel-scraper/blob/main/Project_Output.ipynb
 ### Deployment :https://youtuber-channel-scraper.herokuapp.com/
-
+# Thanks to Sudhanshu Kumar
+# Linkedin - https://www.linkedin.com/in/-sudhanshu-kumar/
 # Keep Learning | Keep Sharing
