@@ -23,6 +23,7 @@ import pymongo
 
 def scrape(url,title_tag):
     client = pymongo.MongoClient("mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority")
+    #client = pymongo.MongoClient("mongodb+srv://amitava2112:suman123@python.eiogdk4.mongodb.net/?retryWrites=true&w=majority")
     db = client.test
     database = client['Youtuber']
     collection = database["reviews"]
@@ -96,4 +97,4 @@ def scrape(url,title_tag):
 
 
 #if __name__ == "__main__":
-    #scrape("https://www.youtube.com/watch?v=WMolA7QMP5w")
+    #scrape("https://www.youtube.com/watch?v=WMolA7QMP5w",'Krish')
