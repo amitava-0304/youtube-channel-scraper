@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import pymongo
+from pymongo import MongoClient
 from flask import Flask, render_template, request,jsonify
 from flask_cors import CORS,cross_origin
 import requests
@@ -63,7 +64,7 @@ def comment_details():
         print(st)
         try:
             load_dotenv()
-            MONGODB_URI = os.getenv("MONGODB_URI")
+            '''MONGODB_URI = os.getenv("MONGODB_URI")
             client = pymongo.MongoClient(MONGODB_URI)
             #client = pymongo.MongoClient("mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority")
             db = client.test
@@ -73,7 +74,15 @@ def comment_details():
             collection = database["reviews"]
             #print(collection)
             # collection.insert_many(data)
-            title = collection.find({'Url':st})
+            title = collection.find({'Url':st})'''
+            # Connect to the MongoDB database using our connection string.
+            client = MongoClient(
+                'mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority')
+
+            # Connect to the coin_markets database and the prices collection.
+            db = client.get_database('Youtuber')
+            db_prices = db.get_collection('reviews')
+            title = db_prices.find({'Url': st})
             print(title)
             l = []
             for i in title:
