@@ -91,7 +91,7 @@ def comment_details():
             return render_template('results.html', title=l)  # show the results to user
 
         except:
-            return 'something is wrong'
+            return db_prices
     else:
             return render_template('index.html')
 
