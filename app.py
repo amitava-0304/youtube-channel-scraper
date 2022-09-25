@@ -7,6 +7,7 @@ from flask_cors import CORS,cross_origin
 import requests
 import pandas as pd
 import time
+import certifi
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'youtube-scraper.cxuykfjq7u4s.us-west-2.rds.amazonaws.com'
@@ -77,7 +78,7 @@ def comment_details():
             title = collection.find({'Url':st})'''
             # Connect to the MongoDB database using our connection string.
             client = MongoClient(
-                'mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority')
+                f'mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority',tlsCAFile=certifi.where())
 
             # Connect to the coin_markets database and the prices collection.
             db = client.get_database('Youtuber')
@@ -91,10 +92,10 @@ def comment_details():
             return render_template('results.html', title=l)  # show the results to user
 
         except:
-            return db_prices
+            return "ERROR"
     else:
             return render_template('index.html')
 
 if __name__ == "__main__":
     #app.run(host='127.0.0.1', port=8001, debug=True)
-	app.run(debug=True)
+	app.run()
