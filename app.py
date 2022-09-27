@@ -13,6 +13,7 @@ from flask_mysqldb import MySQL
 import os
 import aws_S3_videos
 import setup
+import itertools
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'youtube-scraper.cxuykfjq7u4s.us-west-2.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'admin'
@@ -34,15 +35,23 @@ def search():
         print(no)
         details = request.form
         cur = mysql.connection.cursor()
-        print(search_text)
+
+        print(no)
         sql = "select * from youtuber_channel where channel_name like %s"
         adr = (search_text+"%",)
         cur.execute(sql, adr)
-        results = cur.fetchall()
+        result = cur.fetchall()
+        l2 = (no,)
+        lst = result + (l2,)
+        print(lst)
+        flat_list = list(itertools.chain(*lst))
+        print(flat_list)
+        results=tuple(flat_list)
+        results = (results,)
         print(results)
         mysql.connection.commit()
         cur.close()
-        res=render_template('index.html', results=results,no=no)
+        res=render_template('index.html', results=results)
         return res
     else:
         return render_template('index.html')

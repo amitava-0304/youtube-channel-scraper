@@ -89,20 +89,20 @@
                   <p style="font-family:'Comic Sans MS';font-size: large" class="card-text"><b>Description</b> : {{ row[4] }}</p>
                 </div>
               </div>
-{% for id in no %}
+
 
               <form class="" action="/videos" method="post">
               <div class="row mt-4 mb-2">
                 <div class="col-sm-12">
                      <input type="hidden" name="channel_name" value="{{ row[1] }}">
-                    <input type="hidden" name="no" value="{{ id[0] }}">
-                     <button class="btn btn-primary" type="submit">Display latest {{ id[0] }} video details 👉 </button>
+                    <input type="hidden" name="no" value="{{ row[7] }}">
+                     <button class="btn btn-primary" type="submit">Display latest {{ row[7] }} video details 👉 </button>
                 </div>
               </div>
               </form>
             </div>
           </div>
-{% endfor %}
+
     </div>
 {% endfor %}
 <br>
