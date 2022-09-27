@@ -25,13 +25,15 @@
           <table width="1400" border="0" cellspacing="0">
             <thead>
               <tr align="center">
-                <th colspan="4"><h2>Top 50 Videos of this channel are :-</h2></th>
+                <th colspan="6"><h2>Top  Videos of this channel are :-</h2></th>
               </tr>
             <tr align="center">
-                <th><h4>Images</h4></th>
-                <th><h4>Titel</h4></th>
+                <th><h4>Vedios</h4></th>
+                <th><h4>Title</h4></th>
                 <th><h4>Views</h4></th>
                 <th><h4>Likes</h4></th>
+                <th><h4>Comments</h4></th>
+                <th><h4>Download</h4></th>
               </tr>
             </thead>
             <tbody>
@@ -39,12 +41,15 @@
                {% for row in results %}
 
               <tr align="center">
-                <td width="400"><img src="{{ row[5] }}" alt="" width="300" height="200"></th>
+                <td width="400"><a href="{{row[4]}}" ><img src="{{ row[5] }}" alt="" width="300" height="200"></a></th>
                <td width="400">
 
-                   <a href="/comment?sid={{row[4]}}" ><b>{{row[2]}}</b></a></td>
+                  <b>{{row[2]}}</b></td>
 
                   <td><b>{{row[3]}}</b></td><td><b>{{row[6]}}</b></td>
+                  <td><b> <a href="/comment?sid={{row[4]}}" >click here</a></b></td>
+                  <td><b><a href="/download?sid={{row[4]}}" >download</a></b></td>
+
               </tr>
               {% endfor %}
                 </form>

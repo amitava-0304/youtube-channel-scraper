@@ -10,6 +10,9 @@ import pandas as pd
 import time
 import certifi
 from flask_mysqldb import MySQL
+import os
+import aws_S3_videos
+import setup
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'youtube-scraper.cxuykfjq7u4s.us-west-2.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'admin'
@@ -19,6 +22,7 @@ mysql = MySQL(app)
 @app.route('/',methods=['GET'])  # route to display the home page
 @cross_origin()
 def homePage():
+    setup.configure()
     return render_template("index.html")
 @app.route('/review',methods=['POST','GET']) # route to show the review comments in a web UI
 @cross_origin()
@@ -26,6 +30,8 @@ def search():
     if request.method == 'POST':
         # on the basis of search text...search on youtube
         search_text = request.form['search_text']
+        no = request.form['no']
+        print(no)
         details = request.form
         cur = mysql.connection.cursor()
         print(search_text)
@@ -36,7 +42,7 @@ def search():
         print(results)
         mysql.connection.commit()
         cur.close()
-        res=render_template('index.html', results=results)
+        res=render_template('index.html', results=results,no=no)
         return res
     else:
         return render_template('index.html')
@@ -46,9 +52,12 @@ def video_details():
     if request.method == 'POST':
         details = request.form
         channel_name = request.form['channel_name']
+        no = int(request.form['no'])
+        print(channel_name)
+        print(no)
         cur = mysql.connection.cursor()
-        sql="select * from youtuber where channel_name=%s"
-        adr = (channel_name,)
+        sql="select * from youtuber where channel_name=%s order by video_titles desc LIMIT %s"
+        adr = (channel_name,no)
         cur.execute(sql, adr)
         results = cur.fetchall()
         mysql.connection.commit()
@@ -59,11 +68,8 @@ def video_details():
 @cross_origin()
 def comment_details():
     l = []
-    client = MongoClient(
-        f'mongodb+srv://amitava_2112:Suman123@python.e0zfy.mongodb.net/?retryWrites=true&w=majority',
-        tlsCAFile=certifi.where())
-
-    # Connect to the coin_markets database and the prices collection.
+    mongo_url=setup.get_mongodb_url()
+    client = MongoClient(mongo_url)
     db = client.Youtuber
     db_reviews = db.reviews
     if request.method == 'GET':
@@ -86,6 +92,16 @@ def comment_details():
             return l
     else:
             return render_template('index.html')
+
+@app.route('/download',methods=['POST','GET']) # route to show the review comments in a web UI
+@cross_origin()
+def download():
+    if request.method == 'GET':
+         ul=request.args.get('sid')
+         id=ul[32:len(ul)]
+         url = f"https://www.youtube.com/watch?v={id}"
+         link = aws_S3_videos.handle_videos(url)
+    return f"<a href={link}>Download the Video from this URL............</a>"
 
 if __name__ == "__main__":
     #app.run(host='127.0.0.1', port=8001, debug=True)
